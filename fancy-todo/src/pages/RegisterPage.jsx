@@ -46,16 +46,16 @@ class ShowRegisterPage extends Component {
           <div className="register-page">
             <form className="register-form">
               <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={(e) => {this.setState({ name: e.target.value })}} />
+                <label htmlFor="name" className="text-label">Name</label>
+                <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={(e) => {this.setState({ name: e.target.value })}} placeholder="Enter your name" />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
-                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" name="email" value={this.state.email} onChange={(e) => {this.setState({ email: e.target.value })}} />
+                <label htmlFor="email" className="text-label">Email address</label>
+                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" name="email" value={this.state.email} onChange={(e) => {this.setState({ email: e.target.value })}} placeholder="Enter your email" />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" name="password" value={this.state.password} onChange={(e) => {this.setState({ password: e.target.value })}} />
+                <label htmlFor="password" className="text-label">Password</label>
+                <input type="password" className="form-control" id="password" name="password" value={this.state.password} onChange={(e) => {this.setState({ password: e.target.value })}} placeholder="Enter your password" />
               </div>
               <RegisterButton data={{ name: this.state.name, email: this.state.email, password: this.state.password }} changeState={this.changeState} ></RegisterButton>
               <Link to='/'><button type="submit" className="btn btn-danger ml-1">Cancel</button></Link>

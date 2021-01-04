@@ -28,13 +28,17 @@ function TodoCard (props) {
   }
   
   return (
-    <div className="card">
+    <div className="card col-md-3 m-2">
       <div className="card-body">
-        <h5 className="card-title">{props.data.title}</h5>
-        <p className="card-text">{props.data.description}</p>
-        <p className="card-text">{props.data.due_date}</p>
-        <Link to={"/edit/" + props.data.id} children={<Child />}><button className="btn btn-primary">Edit</button></Link>
-        <button className="btn btn-danger" onClick={deleted}>Delete</button>
+        <div className="mb-2">
+          <h5 className="card-title">{props.data.title}</h5>
+          <p className="card-text">{props.data.description}</p>
+          <p className="card-text">{props.data.due_date}</p>
+        </div>
+        <div className="mt-2">
+          <Link to={"/edit/" + props.data.id} children={<Child />}><button className="btn btn-primary mr-1">Edit</button></Link>
+          <button className="btn btn-danger ml-1" onClick={deleted}>Delete</button>
+        </div>
       </div>
     </div>
   )

@@ -44,12 +44,12 @@ class ShowLoginPage extends Component {
           <div className="login-page">
             <form className="login">
                 <div className="form-group">
-                  <label htmlFor="username">Email address</label>
-                  <input type="email" className="form-control" id="username" name="username" placeholder="Enter Your Email" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
+                  <label htmlFor="username" className="text-label">Email address</label>
+                  <input type="email" className="form-control" id="username" name="username" placeholder="Enter your email" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input type="password" className="form-control" id="password" name="password" placeholder="Enter Your Password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+                  <label htmlFor="password" className="text-label">Password</label>
+                  <input type="password" className="form-control" id="password" name="password" placeholder="Enter your password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
                 </div>
                 <LoginButton data={{ email: this.state.email, password: this.state.password }} changeState={this.changeState} ></LoginButton>
             </form>

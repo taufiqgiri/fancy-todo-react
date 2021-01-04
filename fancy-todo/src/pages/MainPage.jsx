@@ -57,7 +57,7 @@ class ShowMainPage extends Component {
               <h1 className="text-center">List To Do</h1>
               <br/>
               <div className="container">
-                <div className="row">
+                <div className="row list-card">
                   {this.state.todos.map((todo) => (
                     <TodoCard key={todo.id} data={todo} fetchTodos={this.fetchTodos} ></TodoCard>
                   ))}

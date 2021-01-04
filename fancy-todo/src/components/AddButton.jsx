@@ -31,7 +31,7 @@ function AddButton(props) {
   }
 
   return (
-    <button type="submit" className="btn btn-primary" onClick={handleClick}>
+    <button type="submit" className="btn btn-primary mr-2" onClick={handleClick}>
       Add
     </button>
   )

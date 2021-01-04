@@ -58,18 +58,17 @@ class EditPage extends Component {
     return (
       <div className="edit-page">
         <h1 className="text-center">Edit Todo</h1>
-        <h1>{this.state.title}</h1>
         <form className="edit-form">
           <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input type="text" className="form-control" id="title" name="title" onChange={(e) => {this.setState({title: e.target.value})}} value={this.state.title} />
+            <label htmlFor="title" className="text-label">Title</label>
+            <input type="text" className="form-control" id="title" name="title" onChange={(e) => {this.setState({title: e.target.value})}} value={this.state.title} placeholder="Enter your todo" />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input type="text" className="form-control" id="description" aria-describedby="emailHelp" name="description" onChange={(e) => {this.setState({description: e.target.value})}} value={this.state.description} />
+            <label htmlFor="description" className="text-label">Description</label>
+            <input type="text" className="form-control" id="description" aria-describedby="emailHelp" name="description" onChange={(e) => {this.setState({description: e.target.value})}} value={this.state.description} placeholder="Enter todo's description (optional)" />
           </div>
           <div className="form-group">
-            <label htmlFor="due_date">Due Date</label>
+            <label htmlFor="due_date" className="text-label">Due Date</label>
             <input type="date" className="form-control" id="due_date" name="due_date" onChange={(e) => {this.setState({due_date: e.target.value})}} value={this.state.due_date} />
           </div>
           <EditButton data={{id:this.state.id, title: this.state.title, description: this.state.description, due_date: this.state.due_date}} getDetail={this.getDetail} ></EditButton>
