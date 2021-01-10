@@ -1,68 +1,80 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import '../App.css'
 import NavbarLogin from '../components/NavbarLogin'
 import {
-  Link
+  Link,
+  Redirect,
+  useHistory
 } from 'react-router-dom'
-import LoginButton from '../components/LoginButton'
-import ErrorPage from '../pages/ErrorPage'
 
 function LoginPage() {
   const authenticated = localStorage.getItem('access_token')
-  return (
-    <div>
-      { !authenticated ? <ShowLoginPage></ShowLoginPage> : <ErrorPage></ErrorPage> }
-    </div>
-  )
-}
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const history = useHistory()
 
-class ShowLoginPage extends Component {
-  constructor (props) {
-    super (props)
-    this.state = {
-      email: '',
-      password: ''
-    }
-  }
-
-  changeState = () => {
-    this.setState({
-      email: '',
-      password: ''
-    }, (err, res) => {
-      if (err) {
-        console.log(err)
+  function submitLogin (e) {
+    e.preventDefault()
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: email,
+        password: password
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
     })
+      .then(async response => {
+        const data = await response.json()
+        if (!response.ok) {
+          const error = (data && data.message) || response.status
+          return Promise.reject(error)
+        }
+        return data
+      })
+      .then(data => {
+        localStorage.setItem('access_token', data.access_token)
+        history.push('/home')
+      })
+      .catch(error => {
+        console.log(error)
+        setEmail('')
+        setPassword('')
+      })
   }
 
-  render() {
-    return (
-      <div>
-        <NavbarLogin />
-        <div className="all-login-page">
-          <div className="login-page">
-            <form className="login">
-                <div className="form-group">
-                  <label htmlFor="username" className="text-label">Email address</label>
-                  <input type="email" className="form-control" id="username" name="username" placeholder="Enter your email" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password" className="text-label">Password</label>
-                  <input type="password" className="form-control" id="password" name="password" placeholder="Enter your password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
-                </div>
-                <LoginButton data={{ email: this.state.email, password: this.state.password }} changeState={this.changeState} ></LoginButton>
-            </form>
-            <br />
-            <div id="register">
-                <p id="register-guidetext">Haven't an account?</p>
-                <Link to='/register'><button type="button" className="btn btn-success" id="btn-register">Register</button></Link>
-            </div>
+  if (authenticated) {
+    return <Redirect to='/home' />
+  }
+
+  return (
+    <div>
+      <NavbarLogin />
+      <div className="all-login-page">
+        <img src={"/login-image.png"} alt="fancy-todo" className="img-login mt-5 mr-3" />
+        <div className="login-page ml-3">
+          <form className="login">
+              <div className="form-group">
+                <label htmlFor="username" className="text-label">Email address</label>
+                <input type="email" className="form-control" id="username" name="username" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password" className="text-label">Password</label>
+                <input type="password" className="form-control" id="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              <button type="submit" className="btn btn-primary" onClick={submitLogin}>Login</button>
+          </form>
+          <br />
+          <div id="register">
+              <p id="register-guidetext">Haven't an account?</p>
+              <Link to='/register'><button type="button" className="btn btn-success" id="btn-register">Register</button></Link>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default LoginPage

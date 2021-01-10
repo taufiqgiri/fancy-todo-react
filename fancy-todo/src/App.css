@@ -63,6 +63,7 @@ body {
 .all-login-page, .all-register-page {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .login-page, .register-page {
@@ -116,4 +117,9 @@ body {
 
 .text-label {
   font-weight: bolder;
+}
+
+.img-login {
+  width: 40vw;
+  height: 80vh;
 }
