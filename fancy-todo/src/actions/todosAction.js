@@ -21,7 +21,6 @@ export function fetchAllTodos() {
           type: 'todos/getAll',
           payload: data
         })
-        console.log(getState().todos[0])
       })
       .catch(error => {
         console.log(error)
